@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            table, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                width: 500px; /* Esta propiedad solo se aplica a la tabla */
+                height: 50px; /* Esta propiedad solo se aplica a los objetos td */
+            }
+
+            tr:nth-child(even) 
+            td:nth-child(even), 
+            tr:nth-child(odd) 
+            td:nth-child(odd) {
+                background-color: #fece9e;
+            }
+
+            tr:nth-child(odd) 
+            td:nth-child(even), 
+            tr:nth-child(even) 
+            td:nth-child(odd) {
+                background-color: #d18b47;
+            }
+
+        </style>
+
+        <script>
+        function mostrarReina(celda){
+            if (window.getComputedStyle(celda).backgroundImage == "none") {
+                        celda.style=`
+                        background-image:URL(Reina.png);
+                        background-repeat:no-repeat;
+                        background-position:center;
+                        `;
+            } else {
+                celda.style=`background-image:none;`;
+            }
+
+        } 
+
+        </script>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+            </tr>
+            <tr>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+            </tr>
+            <tr>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+            </tr>
+            <tr>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+            </tr>
+            <tr>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+            </tr>
+            <tr>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+            </tr>
+            <tr>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+            </tr>
+            <tr>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+                <td onclick="mostrarReina(this);"></td>
+            </tr>
+        </table>
+    </body>
+    <!-- </html> -->
