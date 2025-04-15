@@ -1,96 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./css/style.css">
         <script src="./js/functions.js"></script>
-        <title>Document</title>
+        <title>8 Reinas</title>
     </head>
-
     <body>
         <table id="tablero">
-            <tr>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-            </tr>
-            <tr>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-            </tr>
-            <tr>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-            </tr>
-            <tr>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-            </tr>
-            <tr>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-            </tr>
-            <tr>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-            </tr>
-            <tr>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-            </tr>
-            <tr>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-                <td onclick="mostrarReina(this);"></td>
-            </tr>
+            <script>
+            for (let i = 0; i < 8; i++) {
+                document.write("<tr>");
+                for (let j = 0; j < 8; j++) {
+                    document.write(`
+                        <td onclick="mostrarReina(this)"
+                            onmouseover="cambiarColor(this, ${i}, ${j})"
+                            onmouseout="actualizarTablero()"></td>
+                    `);
+                }
+                document.write("</tr>");
+            }
+        </script>
         </table>
+
+        <!-- Botón para reiniciar el tablero -->
+        <div id="reiniciar">
+            <button onclick="reiniciarTablero()">Reiniciar</button>
+        </div>
+
+        <!-- Botones con imagen de la reina -->
+        <div id="imgReinas">
+            <button onclick="cambiarImagenReina('reina1.png')">
+                <img src="./img/reina1.png" alt="Reina 1" width="50"
+                    height="50">
+            </button>
+            <button onclick="cambiarImagenReina('reina2.png')">
+                <img src="./img/reina2.png" alt="Reina 2" width="50"
+                    height="50">
+            </button>
+            <button onclick="cambiarImagenReina('reina3.png')">
+                <img src="./img/reina3.png" alt="Reina 3" width="50"
+                    height="50">
+            </button>
+        </div>
+
+        <!-- Botones cambio de color celda -->
+        <div id="colorTablero" style="margin-top: 20px;">
+            <label for="colorPar">Color de celdas par:</label>
+            <input type="color" id="colorPar" value="#fece9e"
+                onchange="actualizarTablero()">
+
+            <label for="colorImpar">Color de celdas impar:</label>
+            <input type="color" id="colorImpar" value="#d18b47"
+                onchange="actualizarTablero();">
+        </div>
+
+        <!-- Botones cambio de color linea de ataque -->
+        <div id="colordeAtaque" style="margin-top: 20px;">
+            <label for="colorAtaque">Color de celdas ataque:</label>
+            <input type="color" id="colorAtaque" value="#ff0000"
+                onchange="actualizarColorAtaque()">
+        </div>
+
+        <!-- Botón para resolver el problema -->
+        <div id="resolver">
+            <button onclick="resolverReinas()">Resolver</button>
+        </div>
+
     </body>
-    <!-- </html> -->
+</html>

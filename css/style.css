@@ -1,3 +1,9 @@
+:root {
+    --color-claro: #fece9e;
+    --color-oscuro: #d18b47;
+    --color-ataque: #ff0000;
+}
+
 table,
 td {
     border: 1px solid black;
@@ -10,10 +16,14 @@ td {
 
 tr:nth-child(even) td:nth-child(even),
 tr:nth-child(odd) td:nth-child(odd) {
-    background-color: #fece9e;
+    background-color: var(--color-claro);
 }
 
 tr:nth-child(odd) td:nth-child(even),
 tr:nth-child(even) td:nth-child(odd) {
-    background-color: #d18b47;
+    background-color: var(--color-oscuro);
+}
+
+td.bloqueada {
+    cursor: not-allowed;
 }
