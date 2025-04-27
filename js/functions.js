@@ -1,6 +1,6 @@
 // Variables globales
 var contador = 0;
-var reinaSeleccionada = "reina1.png";
+var reinaSeleccionada = "reina.png";
 var colorAtaque = "#ff0000";
 var reinasColocadas = [];
 
@@ -17,7 +17,7 @@ function mostrarReina(celda) {
         }
 
         if (esPosicionSegura(reinasColocadas, fila, columna)) {
-            celda.style.backgroundImage = `url('img/${reinaSeleccionada}')`;
+            celda.style.backgroundImage = `url('/img/${reinaSeleccionada}')`;
             celda.style.backgroundSize = "contain";
             celda.style.backgroundRepeat = "no-repeat";
             celda.style.backgroundPosition = "center";
@@ -219,7 +219,7 @@ function cambiarImagenReina(nombreImagen) {
     document.querySelectorAll("#tablero td").forEach(td => {
         const estiloActual = window.getComputedStyle(td).backgroundImage;
         if (estiloActual !== "none" && estiloActual !== 'url("none")') {
-            td.style.backgroundImage = `url('img/${reinaSeleccionada}')`;
+            td.style.backgroundImage = `url('/img/${reinaSeleccionada}')`;
         }
     });
 }
@@ -262,7 +262,7 @@ function resolverReinas() {
         const columna = solucion[fila];
         const celda = tablero.rows[fila].cells[columna];
 
-        celda.style.backgroundImage = `url('img/${reinaSeleccionada}')`;
+        celda.style.backgroundImage = `url('/img/${reinaSeleccionada}')`;
         celda.style.backgroundSize = "contain";
         celda.style.backgroundRepeat = "no-repeat";
         celda.style.backgroundPosition = "center";
