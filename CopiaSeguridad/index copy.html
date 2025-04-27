@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="./js/functions.js"></script>
+        <title>8 Reinas</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="board-column">
+                <h1>El juego de las 8 reinas</h2>
+                <table id="tablero">
+                    <script>
+                for (let i = 0; i < 8; i++) {
+                    document.write("<tr>");
+                    for (let j = 0; j < 8; j++) {
+                        document.write(`
+                            <td onclick="mostrarReina(this)"
+                                onmouseover="cambiarColor(this, ${i}, ${j})"
+                                onmouseout="actualizarTablero()"></td>
+                        `);
+                    }
+                    document.write("</tr>");
+                }
+                </script>
+                </table>
+
+                <div class="control-group-table">
+                    <div id="reiniciar">
+                        <button onclick="reiniciarTablero()">Reiniciar</button>
+                    </div>
+                    <div id="resolver">
+                        <button onclick="resolverReinas()">Resolver</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls-column">
+                <div class="control-group">
+                    <h2>Estilo de Reinas</h2>
+                    <div id="imgReinas">
+                        <button onclick="cambiarImagenReina('reina.png')">
+                            <img src="/img/reina.png" alt="Reina" width="50"
+                                height="50">
+                        </button>
+                        <button onclick="cambiarImagenReina('reinaBlanca.png')">
+                            <img src="/img/reinaBlanca.png" alt="Reina 1" width="50"
+                                height="50">
+                        </button>
+                        <button onclick="cambiarImagenReina('reinaCartoon.png')">
+                            <img src="/img/reinaCartoon.png" alt="Reina 2" width="50"
+                                height="50">
+                        </button>
+                        <button onclick="cambiarImagenReina('reinaReal.png')">
+                            <img src="/img/reinaReal.png" alt="Reina 3" width="50"
+                                height="50">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h2>Colores del Tablero</h2>
+                    <div id="colorTablero">
+                        <div class="color-input-group">
+                            <label for="colorPar">Celdas pares:</label>
+                            <input type="color" id="colorPar" value="#fece9e"
+                                onchange="actualizarTablero()">
+                        </div>
+                        <div class="color-input-group">
+                            <label for="colorImpar">Celdas impares:</label>
+                            <input type="color" id="colorImpar" value="#d18b47"
+                                onchange="actualizarTablero()">
+                        </div>
+                        <div class="color-input-group">
+                            <label for="colorAtaque">Color de celdas
+                                ataque:</label>
+                            <input type="color" id="colorAtaque" value="#ff0000"
+                                onchange="actualizarColorAtaque()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
