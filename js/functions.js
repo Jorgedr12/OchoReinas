@@ -12,9 +12,10 @@ function mostrarReina(celda) {
 
     if (estiloActual === "none" || estiloActual === 'url("none")') {
         if (contador >= 8) {
-            alert("No puedes colocar más de 8 reinas");
+            alert("Ya hay 8 reinas en el tablero.");
             return;
         }
+
         if (esPosicionSegura(reinasColocadas, fila, columna)) {
             celda.style.backgroundImage = `url('./img/${reinaSeleccionada}')`;
             celda.style.backgroundSize = "contain";
@@ -23,6 +24,14 @@ function mostrarReina(celda) {
             contador++;
             reinasColocadas.push({ fila, columna });
             actualizarTablero();
+            desactivarMouseOverEnAtaque(fila, columna);
+
+            if (verificarVictoria()) {
+                setTimeout(() => {
+                    alert("¡Felicidades! Has colocado las 8 reinas correctamente.");
+                }, 100);
+            }
+
         } else {
             alert("Posición no segura. Intenta otra celda.");
         }
@@ -31,6 +40,96 @@ function mostrarReina(celda) {
         contador--;
         reinasColocadas = reinasColocadas.filter(q => q.fila !== fila || q.columna !== columna);
         actualizarTablero();
+        reactivarMouseOverEnAtaque(fila, columna);
+    }
+}
+
+function desactivarMouseOverEnAtaque(fila, columna) {
+    const tablero = document.getElementById("tablero");
+    const colorAtaque = document.getElementById("colorAtaque").value;
+
+    // Desactivar en fila
+    for (let i = 0; i < 8; i++) {
+        if (i !== columna) {
+            tablero.rows[fila].cells[i].onmouseover = null;
+        }
+    }
+
+    // Desactivar en columna
+    for (let i = 0; i < 8; i++) {
+        if (i !== fila) {
+            tablero.rows[i].cells[columna].onmouseover = null;
+        }
+    }
+
+    // Desactivar en diagonales
+    for (let i = 1; i < 8; i++) {
+        // Diagonal superior izquierda
+        if (fila - i >= 0 && columna - i >= 0) {
+            tablero.rows[fila - i].cells[columna - i].onmouseover = null;
+        }
+        // Diagonal superior derecha
+        if (fila - i >= 0 && columna + i < 8) {
+            tablero.rows[fila - i].cells[columna + i].onmouseover = null;
+        }
+        // Diagonal inferior izquierda
+        if (fila + i < 8 && columna - i >= 0) {
+            tablero.rows[fila + i].cells[columna - i].onmouseover = null;
+        }
+        // Diagonal inferior derecha
+        if (fila + i < 8 && columna + i < 8) {
+            tablero.rows[fila + i].cells[columna + i].onmouseover = null;
+        }
+    }
+}
+
+function reactivarMouseOverEnAtaque(fila, columna) {
+    const tablero = document.getElementById("tablero");
+
+    // Reactivar en fila
+    for (let i = 0; i < 8; i++) {
+        if (i !== columna) {
+            tablero.rows[fila].cells[i].onmouseover = function () {
+                cambiarColor(this, fila, i);
+            };
+        }
+    }
+
+    // Reactivar en columna
+    for (let i = 0; i < 8; i++) {
+        if (i !== fila) {
+            tablero.rows[i].cells[columna].onmouseover = function () {
+                cambiarColor(this, i, columna);
+            };
+        }
+    }
+
+    // Reactivar en diagonales
+    for (let i = 1; i < 8; i++) {
+        // Diagonal superior izquierda
+        if (fila - i >= 0 && columna - i >= 0) {
+            tablero.rows[fila - i].cells[columna - i].onmouseover = function () {
+                cambiarColor(this, fila - i, columna - i);
+            };
+        }
+        // Diagonal superior derecha
+        if (fila - i >= 0 && columna + i < 8) {
+            tablero.rows[fila - i].cells[columna + i].onmouseover = function () {
+                cambiarColor(this, fila - i, columna + i);
+            };
+        }
+        // Diagonal inferior izquierda
+        if (fila + i < 8 && columna - i >= 0) {
+            tablero.rows[fila + i].cells[columna - i].onmouseover = function () {
+                cambiarColor(this, fila + i, columna - i);
+            };
+        }
+        // Diagonal inferior derecha
+        if (fila + i < 8 && columna + i < 8) {
+            tablero.rows[fila + i].cells[columna + i].onmouseover = function () {
+                cambiarColor(this, fila + i, columna + i);
+            };
+        }
     }
 }
 
@@ -84,11 +183,18 @@ function actualizarTablero() {
         for (let columna = 0; columna < tablero.rows[fila].cells.length; columna++) {
             tablero.rows[fila].cells[columna].style.backgroundColor =
                 (fila + columna) % 2 === 0 ? colorPar : colorImpar;
+
+            // Restablecer el evento onmouseover para todas las celdas
+            tablero.rows[fila].cells[columna].onmouseover = function () {
+                cambiarColor(this, fila, columna);
+            };
         }
     }
 
+    // Desactivar los eventos onmouseover para las celdas bajo ataque
     reinasColocadas.forEach(reina => {
         cambiarColor(null, reina.fila, reina.columna);
+        desactivarMouseOverEnAtaque(reina.fila, reina.columna);
     });
 }
 
@@ -97,6 +203,10 @@ function reiniciarTablero() {
     for (let fila = 0; fila < 8; fila++) {
         for (let columna = 0; columna < 8; columna++) {
             tablero.rows[fila].cells[columna].style.backgroundImage = "none";
+            // Restaurar el evento onmouseover
+            tablero.rows[fila].cells[columna].onmouseover = function () {
+                cambiarColor(this, fila, columna);
+            };
         }
     }
     contador = 0;
@@ -162,4 +272,19 @@ function resolverReinas() {
 
     contador = 8;
     actualizarTablero();
+}
+
+function verificarVictoria() {
+    if (contador === 8 && reinasColocadas.length === 8) {
+        for (let i = 0; i < reinasColocadas.length; i++) {
+            const reina = reinasColocadas[i];
+            const otrasReinas = reinasColocadas.filter((q, index) => index !== i);
+
+            if (!esPosicionSegura(otrasReinas, reina.fila, reina.columna)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
 }
